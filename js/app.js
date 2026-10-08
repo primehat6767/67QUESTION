@@ -1,8 +1,5 @@
-/* Logika aplikasi CBT (file biasa & terbaca).
-   Fitur anti-curang ada di guard.js (ter-obfuscate) — diakses lewat CBTGuard. */
 (function () {
   "use strict";
-// ---- Template (header & halaman soal) ----
 const BG_PATTERN = "data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='29' height='50.115' patternTransform='scale(2) rotate(0)'><rect x='0' y='0' width='100%' height='100%' fill='rgb(97, 166, 250)'/><path d='M14.499 11.82L4.36 5.968l.002-11.706 10.14-5.855L24.638-5.74l-.001 11.707zm0 50.06L4.36 56.029l.002-11.706 10.14-5.855 10.137 5.852-.001 11.707zm14.498-25.117L18.858 30.91l.002-11.707L29 13.349l10.137 5.853-.001 11.706zm-29 0l-10.139-5.852.002-11.707L0 13.349l10.138 5.853-.002 11.706zm14.501-19.905L0 8.488.002-8.257l14.5-8.374L29-8.26l-.002 16.745zm0 50.06L0 58.548l.002-16.745 14.5-8.373L29 41.8l-.002 16.744zM28.996 41.8l-14.498-8.37.002-16.744L29 8.312l14.498 8.37-.002 16.745zm-29 0l-14.498-8.37.002-16.744L0 8.312l14.498 8.37-.002 16.745z' stroke-linecap='square' stroke-width='0.5' stroke='hsla(213, 99%, 23%, 1)' fill='none'/></pattern></defs><rect width='800%25' height='800%25' transform='translate(0,-0.46)' fill='url(%23a)'/></svg>";
 
 const ICON_PREV = `<span role="img" class="mdi"><svg fill="currentColor" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"></path></svg></span>`;
@@ -172,16 +169,14 @@ function soalHTML(no, state) {
     </div>`;
 }
 
-
-// ================= STATE JAWABAN (polos) =================
 const HURUF = ["a", "b", "c", "d", "e"];
 const STORAGE_KEY = "cbt-state-v3";
 const app = document.getElementById("app");
 let panelOpen = false;
 let zoom = 100;
-let live = false;     // true = ujian berjalan (gate sudah dilewati)
-let began = false;    // gate sudah diminta pada halaman ini
-let endGuard = null;  // fungsi penutup guard, diberikan guard saat onReady
+let live = false;
+let began = false;
+let endGuard = null;
 
 function loadState() {
   try {
@@ -193,7 +188,6 @@ function loadState() {
 function saveState(s) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); } catch (e) {} }
 function resetState() { try { localStorage.removeItem(STORAGE_KEY); } catch (e) {} }
 
-// ================= HALAMAN HASIL =================
 function selesaiHTML(state) {
   const total = QUESTIONS.length;
   let score = 0;
@@ -219,7 +213,6 @@ function selesaiHTML(state) {
     </div>`;
 }
 
-// ================= ROUTING =================
 function go(hash) { if (location.hash === hash) render(); else location.hash = hash; }
 function parseRoute() {
   const h = location.hash.replace(/^#/, "");
@@ -230,8 +223,7 @@ function parseRoute() {
   return { page: "soal", no };
 }
 
-// ================= ALUR UJIAN =================
-function startExam() { // gate + anti-curang ditangani CBTGuard (guard.js)
+function startExam() {
   if (began) return;
   began = true;
   CBTGuard.begin({
@@ -268,7 +260,7 @@ function render() {
     return;
   }
 
-  if (!live) { // soal baru dirender setelah gate dilewati
+  if (!live) {
     app.innerHTML = "";
     startExam();
     return;
@@ -297,7 +289,7 @@ function render() {
   const cb = document.getElementById("ragu-ragu");
   cb.addEventListener("change", () => setRagu(cb.checked));
   document.getElementById("ragu-wrap").addEventListener("click", (e) => {
-    if (e.target === cb || e.target.tagName === "LABEL") return; // label sudah memicu checkbox
+    if (e.target === cb || e.target.tagName === "LABEL") return;
     setRagu(!cb.checked);
   });
 
