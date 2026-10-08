@@ -2,7 +2,7 @@
 const QUESTIONS = [
   {
     "text": "Turunan pertama dari f(x) = x³ − 3x² + 2 adalah...",
-    "image": https://id-static.z-dn.net/files/dbb/5ffbe53231c15b7f0cd57a17e198f8a7.jpg,
+    "image": none,
     "options": [
       "3x² − 6x",
       "3x² − 3x",
