@@ -1,5 +1,4 @@
-// Data soal CBT (file biasa, bebas diedit).
-// Struktur: { text, image (null/url), options[], answer_index (0=a ... 4=e) }
+
 const QUESTIONS = [
   {
     "text": "Turunan pertama dari f(x) = x³ − 3x² + 2 adalah...",
