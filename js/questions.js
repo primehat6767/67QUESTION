@@ -14,7 +14,7 @@ const QUESTIONS = [
   },
   {
     "text": "Nilai dari sin 30° adalah...",
-    "image": "https://id-static.z-dn.net/files/dbb/5ffbe53231c15b7f0cd57a17e198f8a7.jpg",
+    "image": null,
     "options": [
       "½√3",
       "1",
